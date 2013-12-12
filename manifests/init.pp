@@ -66,7 +66,8 @@ class apache (
 
   $valid_mpms_re = $::osfamily ? {
     'FreeBSD' => '(event|itk|peruser|prefork|worker)',
-    default   => '(itk|prefork|worker)'
+#    default   => '(itk|prefork|worker|mpm_worker)'
+    default   => '(itk|prefork|mpm_worker)'
   }
 
   if $mpm_module {
@@ -77,7 +78,7 @@ class apache (
   # NOTE: the same strategy may be introduced for other OSes. For this, you
   # should delete the 'if' block below and modify all MPM modules' manifests
   # such that they include apache::package class (currently event.pp, itk.pp,
-  # peruser.pp, prefork.pp, worker.pp).
+  # peruser.pp, prefork.pp, worker.pp, mpm_worker.pp).
   if $::osfamily != 'FreeBSD' {
     package { 'httpd':
       ensure => $package_ensure,

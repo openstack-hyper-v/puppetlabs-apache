@@ -36,13 +36,13 @@ when 'FreeBSD'
   end
 end
 
-describe 'apache::mod::worker class' do
+describe 'apache::mod::mpm_worker class' do
   describe 'running puppet code' do
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOS
         class { 'apache':
-          mpm_module => 'worker',
+          mpm_module => 'mpm_worker',
         }
       EOS
 
