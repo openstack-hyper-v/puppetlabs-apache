@@ -33,7 +33,7 @@ class apache::mod::worker (
   # - $threadsperchild
   # - $maxrequestsperchild
   # - $serverlimit
-  file { "${apache::mod_dir}/worker.conf":
+  file { "${apache::mod_dir}/mpm_worker.conf":
     ensure  => file,
     content => template('apache/mod/worker.conf.erb'),
     require => Exec["mkdir ${apache::mod_dir}"],
@@ -52,9 +52,9 @@ class apache::mod::worker (
       }
     }
     'debian': {
-      file { "${apache::mod_enable_dir}/worker.conf":
+      file { "${apache::mod_enable_dir}/mpm_worker.conf":
         ensure  => link,
-        target  => "${apache::mod_dir}/worker.conf",
+        target  => "${apache::mod_dir}/mpm_worker.conf",
         require => Exec["mkdir ${apache::mod_enable_dir}"],
         before  => File[$apache::mod_enable_dir],
         notify  => Service['httpd'],

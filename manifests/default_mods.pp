@@ -1,5 +1,5 @@
 class apache::default_mods (
-  $all  = true,
+  $all  = false,
   $mods = undef,
 ) {
   # These are modules required to run the default configuration.
@@ -98,7 +98,7 @@ class apache::default_mods (
     include apache::mod::setenvif
     apache::mod { 'auth_basic': }
     apache::mod { 'authn_file': }
-    apache::mod { 'authz_default': }
+#    apache::mod { 'authz_default': }
     apache::mod { 'authz_groupfile': }
     apache::mod { 'authz_user': }
     apache::mod { 'env': }

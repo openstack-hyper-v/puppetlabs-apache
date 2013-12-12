@@ -42,21 +42,20 @@ EnableSendfile <%= @sendfile %>
 #LoadModule fake_module libexec/apache22/mod_fake.so
 <% end -%>
 
-IncludeOptional <%= @mod_load_dir %>/*.load
+Include <%= @mod_load_dir %>/*.load
 <% if @mod_load_dir != @confd_dir and @mod_load_dir != @vhost_load_dir -%>
-IncludeOptional <%= @mod_load_dir %>/*.conf
+Include <%= @mod_load_dir %>/*.conf
 <% end -%>
-IncludeOptional <%= @ports_file %>
+Include <%= @ports_file %>
 
 LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
 LogFormat "%h %l %u %t \"%r\" %>s %b" common
 LogFormat "%{Referer}i -> %U" referer
 LogFormat "%{User-agent}i" agent
 
-IncludeOptional <%= @confd_dir %>/*.conf
+Include <%= @confd_dir %>/*.conf
 <% if @vhost_load_dir != @confd_dir -%>
-#IncludeOptional <%= @vhost_load_dir %>/*.conf
-IncludeOptional <%= @vhost_load_dir %>/*
+Include <%= @vhost_load_dir %>/*.conf
 <% end -%>
 
 <% if @error_documents -%>
